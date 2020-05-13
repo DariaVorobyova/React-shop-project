@@ -25,7 +25,7 @@ class Product extends Component {
                     {value.addToCart(id);
                     value.openModal(id); }
                     }>
-                    {inCart?(<p className="text-capitalize mb-0" disabled>in inCart</p>):
+                    {inCart?(<p className="text-capitalize mb-0" disabled>in Cart</p>):
                     (<FontAwesomeIcon icon={faCartPlus} />)
                 }
                         </button>
