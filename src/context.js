@@ -21,7 +21,7 @@ class ProductProvider extends Component {
         let tempProducts = [];
         storeProducts.forEach(item=>{
             const singleItem = {...item}
-            tempProducts = [...tempProducts, singleItem]
+            tempProducts = [...tempProducts, singleItem];
         })
         this.setState(()=>{
             return {products:tempProducts}
@@ -74,7 +74,22 @@ class ProductProvider extends Component {
         console.log('this is decrement')
     }
     removeItem = (id) => {
-        console.log('remove item')
+        let tempProducts = [...this.state.products];
+        let tempCart = [...this.state.cart];
+
+        tempCart = tempCart.filter(item => item.id !== id);
+
+        const index = tempProducts.indexOf(this.getItem(id));
+        let removedProduct = tempProducts[index];
+        removedProduct.inCart = false;
+        removedProduct.count = 0;
+        removedProduct.total = 0;
+
+        this.setState(() => {
+          return  {
+              cart:[...tempCart],
+              products:[...tempProducts]}
+        })
     }
     clearCart = () => {
         this.setState(() => {
@@ -82,7 +97,8 @@ class ProductProvider extends Component {
         }, () => {
             this.setProducts();
             this.addTotals();
-        })
+        }
+        );
     }
     addTotals = () => {
         let subTotal = 0;
